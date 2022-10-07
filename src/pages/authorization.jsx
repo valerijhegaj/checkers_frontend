@@ -1,15 +1,11 @@
-import {useHistory} from "react-router-dom";
 import {Ways} from "./ways/ways";
+import ButtonLink from "../components/button_link";
 
 const Authorization = () => {
   return (
     <div>
-      <button onClick={() => {}}>
-        login
-      </button>
-      <button onClick={() => {}}>
-        register
-      </button>
+      <ButtonLink link={Ways.Register} text="Register" />
+      <ButtonLink link={Ways.Login} text="Login" />
     </div>
   )
 }
