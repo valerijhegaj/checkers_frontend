@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import state, {subscribe, updateCreateUser, updateLogin} from "./redux/state";
+import {Store} from "./redux/state";
+
+let store = new Store()
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const renderTree = (state) => {
+const renderTree = (store) => {
   root.render(
-    <App state={state} updateLogin={updateLogin} updateCreateUser={updateCreateUser}/>
+    <App store={store}/>
   )
 };
 
-renderTree(state)
-subscribe(renderTree)
+store.Subscribe(renderTree);
+renderTree(store);
 

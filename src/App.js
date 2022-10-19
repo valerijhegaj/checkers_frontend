@@ -5,8 +5,8 @@ import CreateUser from "./compontents/creteUser/createUser";
 const App = (props) => {
   return (
     <div>
-      <Login state={props.state.login} update={props.updateLogin}/>
-      <CreateUser state={props.state.createUser} update={props.updateCreateUser}/>
+      <Login state={props.store._state.login} update={props.store.UpdateLogin.bind(props.store)}/>
+      <CreateUser state={props.store._state.createUser} update={props.store.UpdateCreateUser.bind(props.store)}/>
     </div>
   )
 }
