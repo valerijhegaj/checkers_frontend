@@ -1,14 +1,14 @@
-import {ActionTypes} from "../../redux/state";
+import {LoginActionCreator} from "../../redux/state";
 
 const Login = (props) => {
 
   return (
     <div>
       <input type="text" value={props.state.username} onChange={event => {
-        props.dispatch({type: ActionTypes.UpdateLogin, username: event.target.value, password: props.state.password})
+        props.dispatch(LoginActionCreator(event.target.value, props.state.password))
       }}></input>
       <input value={props.state.password} onChange={event => {
-        props.dispatch({type: ActionTypes.UpdateLogin, username: props.state.username, password: event.target.value})
+        props.dispatch(LoginActionCreator(props.state.username, event.target.value))
       }}></input>
       <button>login</button>
     </div>

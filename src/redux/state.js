@@ -1,4 +1,4 @@
-export const ActionTypes = {
+const ActionTypes = {
   UpdateLogin: 0,
   UpdateCreateUser: 1
 }
@@ -41,4 +41,12 @@ export class Store {
     }
     this._observer(this)
   }
+}
+
+export const LoginActionCreator = (username: string, password: string) => {
+  return {type: ActionTypes.UpdateLogin, username: username, password: password}
+}
+
+export const CreateUserActionCreator = (username: string, password: string) => {
+  return {type: ActionTypes.UpdateCreateUser, username: username, password: password}
 }
