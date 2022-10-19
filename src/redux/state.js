@@ -1,4 +1,5 @@
-import renderTree from "../index";
+import renderTree from "../render";
+
 
 let state = {
   login: {
