@@ -8,7 +8,7 @@ let store = new Store()
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const renderTree = (store) => {
   root.render(
-    <App store={store}/>
+    <App state={store.GetState()} dispatch={store.Dispatch.bind(store)}/>
   )
 };
 
