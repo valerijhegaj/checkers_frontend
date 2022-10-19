@@ -1,5 +1,4 @@
-import renderTree from "../render";
-
+let renderTree
 
 let state = {
   login: {
@@ -15,13 +14,17 @@ let state = {
 export const updateLogin = (username, password) => {
   state.login.username = username
   state.login.password = password
-  renderTree()
+  renderTree(state)
 }
 
 export const updateCreateUser = (username, password) => {
   state.createUser.username = username
   state.createUser.password = password
-  renderTree()
+  renderTree(state)
+}
+
+export const subscribe = (observer) => {
+  renderTree = observer
 }
 
 export default state
