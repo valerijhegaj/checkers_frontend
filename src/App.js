@@ -1,19 +1,15 @@
-import './App.css';
-import {BrowserRouter, Routes, Route} from "react-router-dom";
-import Authorization from "./pages/authorization";
-import {Ways} from "./pages/ways/ways";
-import Register from "./pages/register";
-import Login from "./pages/login";
+import Login from "./compontents/login/login"
+import CreateUser from "./compontents/creteUser/createUser";
 
-function App() {
+
+const App = (props) => {
   return (
-    <Routes>
-      <Route path={Ways.Root} element={<Authorization/>}/>
-      <Route path={Ways.Authorization} element={<Authorization/>}/>
-      <Route path={Ways.Register} element={<Register/>}/>
-      <Route path={Ways.Login} element={<Login/>}/>
-    </Routes>
+    <div>
+      <Login state={props.state.login}/>
+      <CreateUser state={props.state.createUser}/>
+    </div>
   )
 }
 
-export default App;
+export default App
+
