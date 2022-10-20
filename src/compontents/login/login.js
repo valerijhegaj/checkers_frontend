@@ -1,4 +1,4 @@
-import {LoginActionCreator} from "../../redux/state";
+import {LoginActionCreator} from "../../redux/redusers/loginReducer";
 
 const Login = (props) => {
 

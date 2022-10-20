@@ -1,4 +1,4 @@
-import {CreateUserActionCreator} from "../../redux/state";
+import {CreateUserActionCreator} from "../../redux/redusers/createUserReducer";
 
 const CreateUser = (props) => {
   return (

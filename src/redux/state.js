@@ -1,7 +1,5 @@
-const ActionTypes = {
-  UpdateLogin: 0,
-  UpdateCreateUser: 1
-}
+import {CreateUserReducer} from "./redusers/createUserReducer";
+import {LoginReducer} from "./redusers/loginReducer";
 
 export class Store {
   constructor() {
@@ -15,9 +13,16 @@ export class Store {
         password: ""
       }
     }
+    this._reducers = {
+      createUser: CreateUserReducer,
+      login: LoginReducer
+    }
+
   }
+
   _state
   _observer
+  _reducers
 
   GetState() {
     return this._state
@@ -26,27 +31,12 @@ export class Store {
   Subscribe(observer) {
     this._observer = observer
   }
+
   Dispatch(action) {
-    switch (action.type) {
-      case ActionTypes.UpdateLogin:
-        this._state.login.username = action.username
-        this._state.login.password = action.password
-        break
-      case ActionTypes.UpdateCreateUser:
-        this._state.createUser.username = action.username
-        this._state.createUser.password = action.password
-        break
-      default:
-        return
+    for (let key in this._state) {
+      this._state[key] = this._reducers[key](this._state[key], action)
     }
     this._observer(this)
   }
 }
 
-export const LoginActionCreator = (username: string, password: string) => {
-  return {type: ActionTypes.UpdateLogin, username: username, password: password}
-}
-
-export const CreateUserActionCreator = (username: string, password: string) => {
-  return {type: ActionTypes.UpdateCreateUser, username: username, password: password}
-}
