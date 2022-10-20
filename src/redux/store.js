@@ -5,16 +5,12 @@ export class Store {
 
   Subscribe(observer) {
     this._observers.add(observer)
-    return () => {
-      this._observers.delete(observer)
-    }
+    return () => this._observers.delete(observer)
   }
 
   Dispatch(action) {
     this._state = this._reducer(this._state, action)
-    this._observers.forEach(observer => {
-      observer()
-    })
+    this._observers.forEach(observer => observer())
   }
 
   _state
