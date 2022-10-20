@@ -8,9 +8,9 @@ const renderTree = (store) => {
   root.render(
     <App state={store.GetState()} dispatch={store.Dispatch.bind(store)}/>
   )
-};
+}
 
-store.Subscribe(renderTree);
-console.log(store)
-renderTree(store);
+store.Subscribe(() =>{renderTree(store)})
+
+renderTree(store)
 

@@ -1,24 +1,4 @@
 export class Store {
-  constructor() {
-    this._state = {}
-    this._observer = () => {}
-    this._reducers = {}
-  }
-  _state
-  _observer
-  _reducers
-
-  _addReducers(reducers) {
-    this._reducers = reducers
-    for (let key in reducers) {
-      let newState = reducers[key](undefined, {type: "--nothing"})
-      if (newState === undefined) {
-        throw new Error("incorrect reducer " + key + " no initial state or return nothing")
-      }
-      this._state[key] = newState
-    }
-  }
-
   GetState() {
     return this._state
   }
@@ -28,20 +8,43 @@ export class Store {
   }
 
   Dispatch(action) {
-    for (let key in this._reducers) {
-      this._state[key] = this._reducers[key](this._state[key], action)
-    }
-    this._observer(this)
+    this._state = this._reducer(this._state, action)
+    this._observer()
+  }
+
+  constructor() {
+    this._state = {}
+    this._observer = () => {}
+    this._reducer = {}
+  }
+  _state
+  _observer
+  _reducer
+
+  _addReducer(reducer) {
+    this._reducer = reducer
+    this._state = reducer(this._state, {type: undefined})
   }
 }
 
 export function CombineReducers(reducers) {
-  return reducers
+  return function CombinationReducers(state, action) {
+    let isChanged = false
+    let nextState = {}
+    for (let key in reducers) {
+      nextState[key] = reducers[key](state[key], action)
+      isChanged = isChanged || (nextState[key] !== state[key])
+    }
+    if (isChanged) {
+      return nextState
+    }
+    return state
+  }
 }
 
-export function CreateStore(reducers) {
+export function CreateStore(reducer) {
   let store = new Store()
-  store._addReducers(reducers)
+  store._addReducer(reducer)
   return store
 }
 
