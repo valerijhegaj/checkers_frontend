@@ -13,10 +13,6 @@ export class Store {
     this._observers.forEach(observer => observer())
   }
 
-  _state
-  _observers
-  _reducer
-
   constructor() {
     this._state = {}
     this._observers = new Set()
@@ -29,19 +25,17 @@ export class Store {
   }
 }
 
-export function CombineReducers(reducers) {
-  return function CombinationReducers(state, action) {
-    let isChanged = false
-    let nextState = {}
-    for (let key in reducers) {
-      nextState[key] = reducers[key](state[key], action)
-      isChanged = isChanged || (nextState[key] !== state[key])
-    }
-    if (isChanged) {
-      return nextState
-    }
-    return state
+export const CombineReducers = (reducers) => (state, action) => {
+  let isChanged = false
+  let nextState = {}
+  for (let key in reducers) {
+    nextState[key] = reducers[key](state[key], action)
+    isChanged = isChanged || (nextState[key] !== state[key])
   }
+  if (isChanged) {
+    return nextState
+  }
+  return state
 }
 
 export function CreateStore(reducer) {
