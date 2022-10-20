@@ -2,20 +2,13 @@ import MyContext from "./Provider";
 
 const Connect = (mapStateToProps = () => {}, mapDispatchToProps = () => {}) => (component) => {
   const componentWithProps = (store) => {
-    let props = {}
     const stateProps = mapStateToProps(store.GetState())
-    for (let key in stateProps) {
-      props[key] = stateProps[key]
-    }
     const dispatchProps = mapDispatchToProps(store.Dispatch.bind(store))
-    for (let key in dispatchProps) {
-      props[key] = dispatchProps[key]
-    }
+    let props = Object.assign({}, stateProps, dispatchProps)
     return component(props)
   }
 
   return () => {
-
     return <MyContext.Consumer>
       {componentWithProps}
     </MyContext.Consumer>
