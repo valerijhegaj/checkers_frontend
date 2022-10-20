@@ -4,21 +4,21 @@ export class Store {
   }
 
   Subscribe(observer) {
-    this._observer = observer
+    this._observers.push(observer)
   }
 
   Dispatch(action) {
     this._state = this._reducer(this._state, action)
-    this._observer()
+    this._observers.map(observer => observer())
   }
 
   _state
-  _observer
+  _observers
   _reducer
 
   constructor() {
     this._state = {}
-    this._observer = () => {}
+    this._observers = []
     this._reducer = {}
   }
 
