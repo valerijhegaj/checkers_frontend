@@ -9,7 +9,10 @@ export class Store {
 
   Dispatch(action) {
     this._state = this._reducer(this._state, action)
-    this._observers.map(observer => observer())
+    this._observers.map(observer => {
+      observer()
+      return observer
+    })
   }
 
   _state

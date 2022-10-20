@@ -10,9 +10,7 @@ const initialState = {
 export const LoginReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.UpdateLogin:
-      state.username = action.username
-      state.password = action.password
-      return {...state, username: action.username, password:action.password }
+      return {username: action.username, password: action.password }
     default:
       return state
   }
