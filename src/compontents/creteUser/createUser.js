@@ -1,13 +1,11 @@
-import {CreateUserActionCreator} from "../../usingRedux/redusers/createUserReducer";
-
 const CreateUser = (props) => {
   return (
     <div>
       <input type="text" value={props.state.username} onChange={event => {
-        props.dispatch(CreateUserActionCreator(event.target.value, props.state.password))
+        props.update(event.target.value, props.state.password)
       }}></input>
       <input value={props.state.password} onChange={event => {
-        props.dispatch(CreateUserActionCreator(props.state.username, event.target.value))
+        props.update(props.state.username, event.target.value)
       }}></input>
       <button>login</button>
     </div>
