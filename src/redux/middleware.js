@@ -19,5 +19,5 @@ class WrappedStore extends Store {
 }
 
 export const ApplyMiddleware = (middleware) => (createStore) => (reducer) => {
-  new WrappedStore(createStore(reducer), middleware)
+  return new WrappedStore(createStore(reducer), middleware)
 }
