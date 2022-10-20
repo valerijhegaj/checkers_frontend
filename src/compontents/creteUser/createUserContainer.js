@@ -1,4 +1,4 @@
-import {CreateUserActionCreator} from "../../usingRedux/redusers/createUserReducer";
+import {update} from "../../usingRedux/redusers/createUserReducer";
 import Connect from "../../redux/react-redux/Connect";
 import CreateUser from "./createUser";
 
@@ -8,10 +8,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = {
-  update: CreateUserActionCreator
-}
-
-const CreateUserContainer = Connect(mapStateToProps, mapDispatchToProps)(CreateUser)
+const CreateUserContainer = Connect(mapStateToProps, {update})(CreateUser)
 
 export default CreateUserContainer

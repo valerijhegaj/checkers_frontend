@@ -7,7 +7,7 @@ const CreateUser = (props) => {
       <input value={props.state.password} onChange={event => {
         props.update(props.state.username, event.target.value)
       }}></input>
-      <button>login</button>
+      <button>register</button>
     </div>
   )
 }

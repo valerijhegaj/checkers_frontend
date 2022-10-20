@@ -4,7 +4,6 @@ import React from "react"
 const defaultMap = () => {
 }
 
-//
 const Connect = (mapStateToProps = defaultMap,
                  mapDispatchToProps = defaultMap) => (Component) => {
   class Container extends React.Component {
@@ -18,7 +17,6 @@ const Connect = (mapStateToProps = defaultMap,
 
       this.dispatchProps = this._createDispatchProps()
     }
-
 
     render() {
       const stateProps = mapStateToProps(this.state)

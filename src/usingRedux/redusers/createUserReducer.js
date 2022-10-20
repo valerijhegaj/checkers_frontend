@@ -16,6 +16,6 @@ export const CreateUserReducer = (state = initialState, action) => {
   }
 }
 
-export const CreateUserActionCreator = (username: string, password: string) => {
+export const update = (username: string, password: string) => {
   return {type: ActionTypes.UpdateCreateUser, username: username, password: password}
 }
