@@ -1,5 +1,4 @@
 const Login = (props) => {
-
   return (
     <div>
       <input type="text" value={props.state.username} onChange={event => {

@@ -12,14 +12,15 @@ export class Store {
     this._observer()
   }
 
+  _state
+  _observer
+  _reducer
+
   constructor() {
     this._state = {}
     this._observer = () => {}
     this._reducer = {}
   }
-  _state
-  _observer
-  _reducer
 
   _addReducer(reducer) {
     this._reducer = reducer
