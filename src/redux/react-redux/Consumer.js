@@ -4,7 +4,7 @@ const Connect = (mapStateToProps = () => {}, mapDispatchToProps = () => {}) => (
   const componentWithProps = (store) => {
     const stateProps = mapStateToProps(store.GetState())
     const dispatchProps = mapDispatchToProps(store.Dispatch.bind(store))
-    let props = Object.assign({}, stateProps, dispatchProps)
+    let props = {...stateProps, ...dispatchProps}
     return component(props)
   }
 
