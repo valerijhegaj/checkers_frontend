@@ -4,26 +4,27 @@ import React from "react"
 const defaultMap = () => {
 }
 
-const ConnectWithoutSubscribe = (mapStateToProps = defaultMap,
-                                 mapDispatchToProps = defaultMap
-) => (component) => {
-  const componentWithProps = (props) => (store) => {
-    const stateProps = mapStateToProps(store.GetState())
-    const dispatchProps = mapDispatchToProps(store.Dispatch.bind(store))
-    props = {...props, ...stateProps, ...dispatchProps}
-    return component(props)
-  }
-
-  return (props) => {
-    return <MyContext.Consumer>
-      {componentWithProps(props)}
-    </MyContext.Consumer>
-  }
-}
+// legacy
+// const ConnectWithoutSubscribe = (mapStateToProps = defaultMap,
+//                                  mapDispatchToProps = defaultMap
+// ) => (component) => {
+//   const componentWithProps = (props) => (store) => {
+//     const stateProps = mapStateToProps(store.GetState())
+//     const dispatchProps = mapDispatchToProps(store.Dispatch.bind(store))
+//     props = {...props, ...stateProps, ...dispatchProps}
+//     return component(props)
+//   }
+//
+//   return (props) => {
+//     return <MyContext.Consumer>
+//       {componentWithProps(props)}
+//     </MyContext.Consumer>
+//   }
+// }
 
 const Connect = (mapStateToProps = defaultMap,
                  mapDispatchToProps = defaultMap) => (Component) => {
-  class Container_ extends React.Component {
+  class Container extends React.Component {
     constructor(props) {
       super(props)
 
@@ -58,7 +59,7 @@ const Connect = (mapStateToProps = defaultMap,
 
   return props => {
     return <MyContext.Consumer>
-      {store => <Container_ {...props} store={store}/>}
+      {store => <Container {...props} store={store}/>}
     </MyContext.Consumer>
   }
 }
