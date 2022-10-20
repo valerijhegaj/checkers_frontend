@@ -16,23 +16,9 @@ const Connect = (mapStateToProps = defaultMap,
       this.state = this.props.store.GetState()
       this._dispatch = store.Dispatch.bind(store)
 
-      this.dispatchProps = this.createDispatchProps()
+      this.dispatchProps = this._createDispatchProps()
     }
 
-    createDispatchProps() {
-      if (typeof(mapDispatchToProps) == 'function') {
-        return mapDispatchToProps(this._dispatch)
-      } else {
-        let dispatchProps = {}
-        for (let key in mapDispatchToProps) {
-          const actionCreator = mapDispatchToProps[key]
-          dispatchProps[key] = (...args) => {
-            this._dispatch(actionCreator(...args))
-          }
-        }
-        return dispatchProps
-      }
-    }
 
     render() {
       const stateProps = mapStateToProps(this.state)
@@ -55,6 +41,26 @@ const Connect = (mapStateToProps = defaultMap,
 
     _getState() {
       return this.props.store.GetState()
+    }
+
+    _createDispatchProps() {
+      if (typeof(mapDispatchToProps) == 'function') {
+        return mapDispatchToProps(this._dispatch)
+      } else if (typeof(mapDispatchToProps) == 'object') {
+        return this._createDispatchPropsFromObject()
+      }
+      throw new Error(typeof(mapDispatchToProps) + " cant create dispatch props")
+    }
+
+    _createDispatchPropsFromObject() {
+      let dispatchProps = {}
+      for (let key in mapDispatchToProps) {
+        const actionCreator = mapDispatchToProps[key]
+        dispatchProps[key] = (...args) => {
+          this._dispatch(actionCreator(...args))
+        }
+      }
+      return dispatchProps
     }
   }
 
