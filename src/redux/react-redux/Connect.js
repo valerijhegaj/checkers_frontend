@@ -4,8 +4,7 @@ import React from "react"
 const defaultMap = () => {
 }
 
-const Connect = (mapStateToProps = defaultMap,
-                 mapDispatchToProps = defaultMap) => (Component) => {
+const Connect = (mapStateToProps = defaultMap, mapDispatchToProps = defaultMap) => (Component) => {
   class Container extends React.Component {
     constructor(props) {
       super(props)
