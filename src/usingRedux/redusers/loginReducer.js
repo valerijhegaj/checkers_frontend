@@ -4,7 +4,7 @@ const ActionTypes = {
 
 const initialState = {
   password:'',
-  login:''
+  username:''
 }
 
 export const LoginReducer = (state = initialState, action) => {
@@ -12,7 +12,7 @@ export const LoginReducer = (state = initialState, action) => {
     case ActionTypes.UpdateLogin:
       state.username = action.username
       state.password = action.password
-      return state
+      return {...state, username: action.username, password:action.password }
     default:
       return state
   }
