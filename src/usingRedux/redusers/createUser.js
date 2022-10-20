@@ -7,7 +7,7 @@ const initialState = {
   username: ''
 }
 
-export const CreateUserReducer = (state = initialState, action) => {
+export const createUser = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.UpdateCreateUser:
       return {username: action.username, password: action.password}

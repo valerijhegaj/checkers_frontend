@@ -1,4 +1,4 @@
-import {update} from "../../usingRedux/redusers/createUserReducer";
+import {update} from "../../usingRedux/redusers/createUser";
 import Connect from "../../redux/react-redux/Connect";
 import CreateUser from "./createUser";
 
