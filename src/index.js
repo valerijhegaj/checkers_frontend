@@ -13,9 +13,13 @@ const renderTree = (store) => {
   )
 }
 
-store.Subscribe(() => {
+window.Disable = store.Subscribe(() => {
   renderTree(store)
 })
+
+window.Enable = () => {
+  store.Subscribe(() => {renderTree(store)})
+}
 
 renderTree(store)
 

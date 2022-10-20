@@ -4,14 +4,16 @@ export class Store {
   }
 
   Subscribe(observer) {
-    this._observers.push(observer)
+    this._observers.add(observer)
+    return () => {
+      this._observers.delete(observer)
+    }
   }
 
   Dispatch(action) {
     this._state = this._reducer(this._state, action)
-    this._observers.map(observer => {
+    this._observers.forEach(observer => {
       observer()
-      return observer
     })
   }
 
@@ -21,7 +23,7 @@ export class Store {
 
   constructor() {
     this._state = {}
-    this._observers = []
+    this._observers = new Set()
     this._reducer = {}
   }
 
