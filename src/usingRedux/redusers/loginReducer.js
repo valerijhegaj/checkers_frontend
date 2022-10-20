@@ -2,16 +2,20 @@ const ActionTypes = {
   UpdateLogin: "update login"
 }
 
-export const LoginReducer = (state, action) => {
+const initialState = {
+  password:'',
+  login:''
+}
+
+export const LoginReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.UpdateLogin:
       state.username = action.username
       state.password = action.password
-      break
+      return state
     default:
-      break
+      return state
   }
-  return state
 }
 export const LoginActionCreator = (username: string, password: string) => {
   return {type: ActionTypes.UpdateLogin, username: username, password: password}
