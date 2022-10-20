@@ -8,10 +8,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    update: (username, password) => {dispatch(LoginActionCreator(username, password))}
-  }
+const mapDispatchToProps = {
+  update: LoginActionCreator
 }
 
 const LoginContainer = Connect(mapStateToProps, mapDispatchToProps)(Login)

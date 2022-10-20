@@ -4,6 +4,7 @@ import React from "react"
 const defaultMap = () => {
 }
 
+//
 const Connect = (mapStateToProps = defaultMap,
                  mapDispatchToProps = defaultMap) => (Component) => {
   class Container extends React.Component {
@@ -11,15 +12,32 @@ const Connect = (mapStateToProps = defaultMap,
       super(props)
 
       const store = this.props.store
-      this._dispatch = store.Dispatch.bind(store)
+
       this.state = this.props.store.GetState()
+      this._dispatch = store.Dispatch.bind(store)
+
+      this.dispatchProps = this.createDispatchProps()
+    }
+
+    createDispatchProps() {
+      if (typeof(mapDispatchToProps) == 'function') {
+        return mapDispatchToProps(this._dispatch)
+      } else {
+        let dispatchProps = {}
+        for (let key in mapDispatchToProps) {
+          const actionCreator = mapDispatchToProps[key]
+          dispatchProps[key] = (...args) => {
+            this._dispatch(actionCreator(...args))
+          }
+        }
+        return dispatchProps
+      }
     }
 
     render() {
-      const stateProps = mapStateToProps(this._getState())
-      const dispatchProps = mapDispatchToProps(this._dispatch)
+      const stateProps = mapStateToProps(this.state)
       return (
-        <Component {...this.props} {...stateProps} {...dispatchProps}/>
+        <Component {...this.props} {...stateProps} {...this.dispatchProps}/>
       )
     }
 
