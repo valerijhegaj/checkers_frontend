@@ -32,10 +32,6 @@ const Connect = (mapStateToProps = defaultMap,
       this._dispatch = store.Dispatch.bind(store)
     }
 
-    _getState() {
-      return this.props.store.GetState()
-    }
-
     render() {
       const stateProps = mapStateToProps(this._getState())
       const dispatchProps = mapDispatchToProps(this._dispatch)
@@ -45,15 +41,19 @@ const Connect = (mapStateToProps = defaultMap,
     }
 
     componentDidMount() {
-      this.unsubscribe = this.props.store.Subscribe(this._handleChange.bind(this))
+      this._unsubscribe = this.props.store.Subscribe(this._handleChange.bind(this))
     }
 
     componentWillUnmount() {
-      this.unsubscribe()
+      this._unsubscribe()
     }
 
     _handleChange() {
       this.forceUpdate()
+    }
+
+    _getState() {
+      return this.props.store.GetState()
     }
   }
 
