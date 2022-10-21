@@ -1,11 +1,9 @@
-import CreateUserContainer from "./compontents/creteUser/createUserContainer";
-import LoginContainer from "./compontents/login/loginContainer";
+import SwitcherContainer from "./compontents/switcher/switcherContainer";
 
 const App = () => {
   return (
     <div>
-      <LoginContainer />
-      <CreateUserContainer />
+      <SwitcherContainer />
     </div>
   )
 }

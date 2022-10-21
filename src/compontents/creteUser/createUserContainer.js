@@ -1,4 +1,4 @@
-import {update} from "../../usingRedux/redusers/createUser";
+import {onClick, update, back} from "../../usingRedux/redusers/createUser";
 import Connect from "../../redux/react-redux/Connect";
 import CreateUser from "./createUser";
 
@@ -8,6 +8,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const CreateUserContainer = Connect(mapStateToProps, {update})(CreateUser)
+const CreateUserContainer = Connect(mapStateToProps, {update, onClick, back})(CreateUser)
 
 export default CreateUserContainer

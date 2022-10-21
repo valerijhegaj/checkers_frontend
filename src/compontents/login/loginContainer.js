@@ -1,5 +1,5 @@
 import Login from "./login";
-import {update} from "../../usingRedux/redusers/login";
+import {onClick, update, back} from "../../usingRedux/redusers/login";
 import Connect from "../../redux/react-redux/Connect";
 
 const mapStateToProps = (state) => {
@@ -8,6 +8,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const LoginContainer = Connect(mapStateToProps, {update})(Login)
+const LoginContainer = Connect(mapStateToProps, {update, onClick, back})(Login)
 
 export default LoginContainer
