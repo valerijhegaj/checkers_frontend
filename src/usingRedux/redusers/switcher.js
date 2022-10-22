@@ -9,7 +9,10 @@ export const switcherCondition = {
   createUser: 1,
   mainMenu: 2,
   startLoading: 3,
-  startMenu: 4
+  startMenu: 4,
+  startScreen: 5,
+  joinScreen: 6,
+  gameScreen: 7
 }
 const initialState = {
   condition: switcherCondition.startLoading
@@ -29,10 +32,8 @@ export const updateSwitcher = (condition) => {
 }
 
 export const startLoad = () => async (dispatch) => {
-  let error = await authAPI.checkAuth().catch(() => {})
-  if (typeof(error) != "undefined") {
+  let error = await authAPI.checkAuth().catch(() => dispatch(updateSwitcher(switcherCondition.startMenu)))
+  if (typeof (error) != "undefined") {
     dispatch(updateSwitcher(switcherCondition.mainMenu))
-    return
   }
-  dispatch(updateSwitcher(switcherCondition.startMenu))
 }

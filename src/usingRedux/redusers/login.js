@@ -18,6 +18,7 @@ export const login = (state = initialState, action) => {
       return state
   }
 }
+
 export const update = (username: string, password: string) => {
   return {type: ActionTypes.UpdateLogin, username: username, password: password}
 }
@@ -26,8 +27,10 @@ export const onClick = (username: string, password: string) => async (dispatch) 
   if (username === "") {
     return
   }
-  await authAPI.login(username, password)
-  dispatch(updateSwitcher(switcherCondition.mainMenu))
+  let response = await authAPI.login(username, password).catch(()=>{})
+  if (response !== undefined) {
+    dispatch(updateSwitcher(switcherCondition.mainMenu))
+  }
 }
 
 export const back = () => async (dispatch) => {

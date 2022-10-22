@@ -28,8 +28,10 @@ export const onClick = (username: string, password: string) => async (dispatch) 
   await authAPI.register(username, password).catch(error => {
     console.log(error.response.status)
   })
-  await authAPI.login(username, password)
-  dispatch(updateSwitcher(switcherCondition.mainMenu))
+  let response = await authAPI.login(username, password).catch(()=>{})
+  if (response !== undefined) {
+    dispatch(updateSwitcher(switcherCondition.mainMenu))
+  }
 }
 
 export const back = () => async (dispatch) => {
